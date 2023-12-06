@@ -5,5 +5,4 @@ class ErrorsWithStatus extends Error {
         this.status = status;
     }
 }
-
 module.exports = ErrorsWithStatus;
