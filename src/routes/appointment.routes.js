@@ -8,6 +8,15 @@ const appointmentController = require('../controllers/appointment.controller');
 const router = Router();
 
 // const UserController = require('../controllers/user.controllers');
-router.get('/', accessTokenValidator, wrapController(appointmentController.getAppointmentList));
+router.get(
+    '/studentAppointment',
+    accessTokenValidator,
+    wrapController(appointmentController.getStudentAppointmentList),
+);
+router.get(
+    '/teacherAppointment',
+    accessTokenValidator,
+    wrapController(appointmentController.getTeacherAppointMentList),
+);
 router.post('/setAppointment', accessTokenValidator, wrapController(appointmentController.setAppointment));
 module.exports = router;
