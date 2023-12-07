@@ -68,6 +68,28 @@ class CourseServices {
             page: page ? page : 1,
         };
     }
+    async getListTeacherCourse(id_teacher) {
+        const courses = await db.Course.findAll({
+            where: {
+                teacher_id: id_teacher,
+            },
+            order: [['id', 'DESC']],
+            attributes: ['id', 'title', 'description', 'price', 'status'],
+        });
+        const Courses = JSON.parse(JSON.stringify(courses));
+        for (let i = 0; i < Courses.length; i++) {
+            const rating = await db.Rating.findAll({
+                where: {
+                    course_id: Courses[i].id,
+                },
+                attributes: [[db.sequelize.fn('AVG', db.sequelize.col('star')), 'totalStar']],
+            });
+            const Rating = JSON.parse(JSON.stringify(rating));
+            Courses[i].totalStar = Rating[0].totalStar ? Number(Rating[0].totalStar).toFixed(1) : 0;
+        }
+
+        return Courses;
+    }
     async CourseDetails(id_course) {
         const course = await db.Course.findOne({
             where: {

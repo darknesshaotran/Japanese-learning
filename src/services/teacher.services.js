@@ -2,6 +2,7 @@ const ErrorsWithStatus = require('../constants/Error');
 const HTTP_STATUS = require('../constants/httpStatus');
 const db = require('../models');
 const { Op } = require('sequelize');
+const courseServices = require('./course.services');
 
 class teacherService {
     async getListTeacher(limit, page, search) {
@@ -54,9 +55,14 @@ class teacherService {
             include: [{ model: db.Teacher, as: 'Teacher', attributes: { exclude: ['createdAt', 'updatedAt'] } }],
         });
         if (!teacher) throw new ErrorsWithStatus({ status: HTTP_STATUS.NOT_FOUND, message: 'Teacher not found' });
+        const Teacher = JSON.parse(JSON.stringify(teacher));
+        console.log(Teacher);
+        const teacher_id = Teacher.Teacher.id;
+        const course = await courseServices.getListTeacherCourse(teacher_id);
         return {
             success: true,
-            result: teacher,
+            result: Teacher,
+            courseList: course,
         };
     }
     async createData(req, res, next) {
