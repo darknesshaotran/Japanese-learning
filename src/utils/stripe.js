@@ -8,7 +8,7 @@ const checkout_session = async (req, res, next) => {
         const charge = await stripe.charges.create({
             amount: Number(req.body.amount),
             currency: 'usd',
-            source: 'tok_visa',
+            source: req.body.card,
             description: 'payment for online course',
         });
         res.json({ success: true, message: 'payment successful' });

@@ -27,9 +27,14 @@ class UserServices {
         const user = await db.User.create({
             first_name: data.first_name,
             last_name: data.last_name,
+            nickname: '',
+            gender: 0,
+            dob: new Date(),
+            avatar: '',
             mail: data.email,
             role: data.role,
             password: hashPassword(data.password),
+            status: 1,
         });
         // await sendEmail('<h1 style="color:red">😍 register successfully 😍</h1>', 'PBL6_message', data.email);
         return {
