@@ -10,9 +10,6 @@ const checkout_session = async (req, res, next) => {
             currency: 'usd',
             source: 'tok_visa',
             description: req.body.description,
-            billing_details: {
-                name: req.body.name,
-            },
         });
         res.json({ success: true, message: 'payment successful' });
     } catch (err) {
