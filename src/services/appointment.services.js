@@ -108,8 +108,31 @@ class AppointmentServices {
     }
     async setAppointment(userID, teacher_id, description, start_time, end_time) {
         if (!(teacher_id && start_time && end_time)) {
-            throw new Error('vui lòng điền đầy đủ thông tin');
+            return {
+                success: false,
+                message: 'vui lòng điền đầy đủ thông tin',
+            };
         }
+
+        const existingAppointment = await db.Appointment.findOne({
+            where: {
+                teacher_id: teacher_id,
+                start_time: {
+                    [Op.lte]: start_time,
+                },
+                end_time: {
+                    [Op.gte]: start_time,
+                },
+            },
+        });
+
+        if (existingAppointment) {
+            return {
+                success: false,
+                message: 'đã có cuộc hẹn khác trong khoảng thời gian này, vui lòng nhập lại',
+            };
+        }
+
         const options = {
             student_id: userID,
             teacher_id: teacher_id,
@@ -120,7 +143,7 @@ class AppointmentServices {
         await db.Appointment.create(options);
         return {
             success: true,
-            message: 'Set Appointment successfully',
+            message: 'Đặt cuộc hẹn thành công',
         };
     }
 }
