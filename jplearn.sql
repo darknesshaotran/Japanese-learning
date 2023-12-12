@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `jplearn`
+-- Database: `byh16ujrvmxxwmhur8vd`
 --
 
 -- --------------------------------------------------------
@@ -27,22 +27,22 @@ SET time_zone = "+00:00";
 -- Table structure for table `appointments`
 --
 
-CREATE TABLE `appointments` (
+CREATE TABLE `Appointments` (
   `id` int(11) NOT NULL,
   `student_id` int(11) DEFAULT NULL,
   `teacher_id` int(11) DEFAULT NULL,
   `description` varchar(255) DEFAULT NULL,
   `start_time` datetime DEFAULT NULL,
   `end_time` datetime DEFAULT NULL,
-  `createdAt` date NOT NULL DEFAULT current_timestamp(),
-  `updatedAt` date DEFAULT current_timestamp()
+  `createdAt` datetime NOT NULL DEFAULT current_timestamp(),
+  `updatedAt` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `appointments`
---
+--  
 
-INSERT INTO `appointments` (`id`, `student_id`, `teacher_id`, `description`, `start_time`, `end_time`, `createdAt`, `updatedAt`) VALUES
+INSERT INTO `Appointments` (`id`, `student_id`, `teacher_id`, `description`, `start_time`, `end_time`, `createdAt`, `updatedAt`) VALUES
 (1, 6, NULL, '', NULL, NULL, '2023-12-06', '2023-12-06'),
 (2, 6, 24, 'an important appointment for orientation', NULL, NULL, '2023-12-06', '2023-12-06'),
 (3, 6, 24, 'an important appointment for orientation', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '2023-12-06', '2023-12-06'),
@@ -83,7 +83,7 @@ CREATE TABLE `chat_messages` (
 -- Table structure for table `courses`
 --
 
-CREATE TABLE `courses` (
+CREATE TABLE `Courses` (
   `id` int(11) NOT NULL,
   `teacher_id` int(11) DEFAULT NULL,
   `title` varchar(50) DEFAULT NULL,
@@ -98,7 +98,7 @@ CREATE TABLE `courses` (
 -- Table structure for table `lessons`
 --
 
-CREATE TABLE `lessons` (
+CREATE TABLE `Lessons` (
   `id` int(11) NOT NULL,
   `course_id` int(11) DEFAULT NULL,
   `title` varchar(50) DEFAULT NULL,
@@ -113,7 +113,7 @@ CREATE TABLE `lessons` (
 -- Table structure for table `ratings`
 --
 
-CREATE TABLE `ratings` (
+CREATE TABLE `Ratings` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `course_id` int(11) NOT NULL,
@@ -128,7 +128,7 @@ CREATE TABLE `ratings` (
 -- Table structure for table `records`
 --
 
-CREATE TABLE `records` (
+CREATE TABLE `Records` (
   `id` int(11) NOT NULL,
   `appointment_id` int(11) DEFAULT NULL,
   `url` text DEFAULT NULL
@@ -140,7 +140,7 @@ CREATE TABLE `records` (
 -- Table structure for table `students`
 --
 
-CREATE TABLE `students` (
+CREATE TABLE `Students` (
   `id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   `detail_infor` varchar(255) DEFAULT NULL,
@@ -168,21 +168,21 @@ CREATE TABLE `student_courses` (
 -- Table structure for table `teachers`
 --
 
-CREATE TABLE `teachers` (
+CREATE TABLE `Teachers` (
   `id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   `detail_infor` varchar(255) DEFAULT NULL,
   `experience` varchar(255) DEFAULT NULL,
   `jp_level` varchar(25) DEFAULT NULL,
-  `createdAt` date DEFAULT NULL,
-  `updatedAt` date DEFAULT NULL
+  `createdAt` datetime DEFAULT NULL,
+  `updatedAt` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `teachers`
 --
 
-INSERT INTO `teachers` (`id`, `user_id`, `detail_infor`, `experience`, `jp_level`, `createdAt`, `updatedAt`) VALUES
+INSERT INTO `Teachers` (`id`, `user_id`, `detail_infor`, `experience`, `jp_level`, `createdAt`, `updatedAt`) VALUES
 (0, 7, 'nihongo ga omoshiroi desu', '0 năm', 'N1', '2023-12-06', '2023-12-06'),
 (1, 8, 'nihongo ga omoshiroi desu', '1 năm', 'N1', '2023-12-06', '2023-12-06'),
 (2, 9, 'nihongo ga omoshiroi desu', '2 năm', 'N1', '2023-12-06', '2023-12-06'),
@@ -290,7 +290,7 @@ INSERT INTO `teachers` (`id`, `user_id`, `detail_infor`, `experience`, `jp_level
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE `Users` (
   `id` int(11) NOT NULL,
   `nick_name` varchar(50) NOT NULL,
   `mail` varchar(50) DEFAULT NULL,
@@ -302,15 +302,15 @@ CREATE TABLE `users` (
   `dob` date DEFAULT NULL,
   `role` varchar(25) DEFAULT NULL,
   `status` tinyint(2) DEFAULT NULL,
-  `createdAt` date DEFAULT NULL,
-  `updatedAt` int(11) DEFAULT NULL
+  `createdAt` datetime DEFAULT NULL,
+  `updatedAt` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `nick_name`, `mail`, `password`, `avatar`, `gender`, `first_name`, `last_name`, `dob`, `role`, `status`, `createdAt`, `updatedAt`) VALUES
+INSERT INTO `Users` (`id`, `nick_name`, `mail`, `password`, `avatar`, `gender`, `first_name`, `last_name`, `dob`, `role`, `status`, `createdAt`, `updatedAt`) VALUES
 (6, '', 'darknessclmm@gmail.com', '2c91440bfacd977e1a27d76d53e199521669b68a06c6e6e07edd17a952f978ff', NULL, NULL, 'trần', 'hào', NULL, NULL, NULL, '2023-11-22', 2023),
 (7, 'teacher0', 'teacher0@example.com', '', 'https://lawnet.vn/uploads/image/2020/10/08/Giao-vien-tieu-hoc-trung-hoc-can-phai-lam-gi-khi-chua-co-bang-dai-hoc(1).jpg', 0, 'teacher', '0', '2023-12-06', 'teacher', 0, '2023-12-06', 2023),
 (8, 'teacher1', 'teacher1@example.com', '', 'https://lawnet.vn/uploads/image/2020/10/08/Giao-vien-tieu-hoc-trung-hoc-can-phai-lam-gi-khi-chua-co-bang-dai-hoc(1).jpg', 0, 'teacher', '1', '2023-12-06', 'teacher', 1, '2023-12-06', 2023),
@@ -420,7 +420,7 @@ INSERT INTO `users` (`id`, `nick_name`, `mail`, `password`, `avatar`, `gender`, 
 --
 -- Indexes for table `appointments`
 --
-ALTER TABLE `appointments`
+ALTER TABLE `Appointments`
   ADD PRIMARY KEY (`id`),
   ADD KEY `student_id` (`student_id`),
   ADD KEY `teacher_id` (`teacher_id`);
@@ -444,21 +444,21 @@ ALTER TABLE `chat_messages`
 --
 -- Indexes for table `courses`
 --
-ALTER TABLE `courses`
+ALTER TABLE `Courses`
   ADD PRIMARY KEY (`id`),
   ADD KEY `teacher_id` (`teacher_id`);
 
 --
 -- Indexes for table `lessons`
 --
-ALTER TABLE `lessons`
+ALTER TABLE `Lessons`
   ADD PRIMARY KEY (`id`),
   ADD KEY `course_id` (`course_id`);
 
 --
 -- Indexes for table `ratings`
 --
-ALTER TABLE `ratings`
+ALTER TABLE `Ratings`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`),
   ADD KEY `course_id` (`course_id`);
@@ -466,14 +466,14 @@ ALTER TABLE `ratings`
 --
 -- Indexes for table `records`
 --
-ALTER TABLE `records`
+ALTER TABLE `Records`
   ADD PRIMARY KEY (`id`),
   ADD KEY `appointment_id` (`appointment_id`);
 
 --
 -- Indexes for table `students`
 --
-ALTER TABLE `students`
+ALTER TABLE `Students`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
 
@@ -488,14 +488,14 @@ ALTER TABLE `student_courses`
 --
 -- Indexes for table `teachers`
 --
-ALTER TABLE `teachers`
+ALTER TABLE `Teachers`
   ADD PRIMARY KEY (`id`),
   ADD KEY `user_id` (`user_id`);
 
 --
 -- Indexes for table `users`
 --
-ALTER TABLE `users`
+ALTER TABLE `Users`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -505,7 +505,7 @@ ALTER TABLE `users`
 --
 -- AUTO_INCREMENT for table `appointments`
 --
-ALTER TABLE `appointments`
+ALTER TABLE `Appointments`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
@@ -517,19 +517,19 @@ ALTER TABLE `bookmark_courses`
 --
 -- AUTO_INCREMENT for table `lessons`
 --
-ALTER TABLE `lessons`
+ALTER TABLE `Lessons`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ratings`
 --
-ALTER TABLE `ratings`
+ALTER TABLE `Ratings`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `records`
 --
-ALTER TABLE `records`
+ALTER TABLE `Records`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -541,7 +541,7 @@ ALTER TABLE `student_courses`
 --
 -- AUTO_INCREMENT for table `users`
 --
-ALTER TABLE `users`
+ALTER TABLE `Users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=107;
 
 --
@@ -551,34 +551,34 @@ ALTER TABLE `users`
 --
 -- Constraints for table `appointments`
 --
-ALTER TABLE `appointments`
-  ADD CONSTRAINT `appointments_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `teachers` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `appointments_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `Appointments`
+  ADD CONSTRAINT `appointments_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `Teachers` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `appointments_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `Users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `courses`
 --
-ALTER TABLE `courses`
-  ADD CONSTRAINT `courses_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `teachers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `Courses`
+  ADD CONSTRAINT `courses_ibfk_1` FOREIGN KEY (`teacher_id`) REFERENCES `Teachers` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `lessons`
 --
-ALTER TABLE `lessons`
-  ADD CONSTRAINT `lessons_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `Lessons`
+  ADD CONSTRAINT `lessons_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `Courses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `ratings`
 --
-ALTER TABLE `ratings`
-  ADD CONSTRAINT `ratings_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `ratings_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `Ratings`
+  ADD CONSTRAINT `ratings_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `Courses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `ratings_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `Users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `teachers`
 --
-ALTER TABLE `teachers`
-  ADD CONSTRAINT `teachers_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `Teachers`
+  ADD CONSTRAINT `teachers_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `Users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

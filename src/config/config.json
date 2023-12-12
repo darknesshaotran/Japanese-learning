@@ -1,9 +1,9 @@
 {
     "development": {
-        "username": "root",
-        "password": null,
-        "database": "jplearn",
-        "host": "127.0.0.1",
+        "username": "u90pbylcc8puywds",
+        "password": "F1KmWOkWYX1exxs8FYyg",
+        "database": "byh16ujrvmxxwmhur8vd",
+        "host": "byh16ujrvmxxwmhur8vd-mysql.services.clever-cloud.com",
         "dialect": "mysql",
         "logging": false,
         "timezone": "+07:00"
