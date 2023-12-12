@@ -27,7 +27,7 @@ class UserServices {
         const user = await db.User.create({
             first_name: data.first_name,
             last_name: data.last_name,
-            nickname: '',
+            nick_name: '',
             gender: 0,
             dob: new Date(),
             avatar: '',
