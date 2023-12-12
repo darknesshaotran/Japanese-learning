@@ -10,6 +10,7 @@ const checkout_session = async (req, res, next) => {
             currency: 'usd',
             source: 'tok_visa',
             description: 'payment for online course',
+            customer: req.body.name,
         });
         res.json({ success: true, message: 'payment successful' });
     } catch (err) {
