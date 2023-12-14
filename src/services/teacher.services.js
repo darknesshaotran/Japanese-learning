@@ -35,6 +35,15 @@ class teacherService {
             },
         });
         const Teachers = JSON.parse(JSON.stringify(teachers));
+        for (let i = 0; i < Teachers.length; i++) {
+            const teacher_detail = await db.Teacher.findOne({
+                where: {
+                    user_id: Teachers[i].id,
+                },
+            });
+            const Teacher_Detail = JSON.parse(JSON.stringify(teacher_detail));
+            Teachers[i].Teacher_Detail = Teacher_Detail;
+        }
 
         const totalPages = Math.ceil(Count / limit);
         return {

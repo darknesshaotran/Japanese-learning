@@ -3,8 +3,9 @@ const courseRoute = require('./course.routes');
 const userRoute = require('./user.routes');
 const AppointmentRoute = require('./appointment.routes');
 const paymentRoute = require('./payment.routes');
-
+const MessageRoute = require('./message.routes');
 const route = (app) => {
+    app.use('/api/message', MessageRoute);
     app.use('/api/teacher', teacherRoute);
     app.use('/api/payment', paymentRoute);
     app.use('/api/appointment', AppointmentRoute);
