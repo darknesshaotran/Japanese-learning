@@ -144,10 +144,40 @@ class CourseServices {
             });
             const Rating = JSON.parse(JSON.stringify(rating));
             Course.Rating = Rating;
+
+            ////
+            const lesson = await db.Lesson.findAll({
+                where: {
+                    course_id: id_course,
+                },
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt'],
+                },
+            });
+            const Lesson = JSON.parse(JSON.stringify(lesson));
+            Course.Lesson = Lesson;
             return Course;
         } else {
             throw new ErrorsWithStatus({ status: 403, message: 'course not found' });
         }
     }
+    // async createData() {
+    //     const l = ['basic grammar', 'basic kaiwa', 'advanced grammar', 'advanced kaiwa'];
+    //     for (let i = 0; i < 36; i++) {
+    //         for (let j = 0; j < 4; j++) {
+    //             await db.Lesson.create({
+    //                 course_id: i,
+    //                 title: l[j],
+    //                 description: 'description for ' + l[j],
+    //                 url: '',
+    //                 status: 1,
+    //             });
+    //         }
+    //     }
+    //     return {
+    //         success: true,
+    //     };
+    // }
 }
+
 module.exports = new CourseServices();
