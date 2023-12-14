@@ -124,26 +124,30 @@ class CourseServices {
             attributes: [[db.sequelize.fn('AVG', db.sequelize.col('star')), 'totalStar']],
         });
         const Star = JSON.parse(JSON.stringify(star));
-        Course.totalStar = Star[0].totalStar ? Number(Star[0].totalStar).toFixed(1) : 0;
-        const rating = await db.Rating.findAll({
-            where: {
-                course_id: id_course,
-            },
-            attributes: {
-                exclude: ['createdAt', 'updatedAt'],
-            },
-            include: [
-                {
-                    model: db.User,
-                    attributes: {
-                        exclude: ['id', 'password', 'createdAt', 'updatedAt'],
-                    },
+        if (Course) {
+            Course.totalStar = Star[0].totalStar ? Number(Star[0].totalStar) : 0;
+            const rating = await db.Rating.findAll({
+                where: {
+                    course_id: id_course,
                 },
-            ],
-        });
-        const Rating = JSON.parse(JSON.stringify(rating));
-        Course.Rating = Rating;
-        return Course;
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt'],
+                },
+                include: [
+                    {
+                        model: db.User,
+                        attributes: {
+                            exclude: ['id', 'password', 'createdAt', 'updatedAt'],
+                        },
+                    },
+                ],
+            });
+            const Rating = JSON.parse(JSON.stringify(rating));
+            Course.Rating = Rating;
+            return Course;
+        } else {
+            throw new ErrorsWithStatus({ status: 403, message: 'course not found' });
+        }
     }
 }
 module.exports = new CourseServices();
