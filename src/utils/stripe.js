@@ -3,18 +3,16 @@ dotenv.config();
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
 const checkout_session = async (req, res, next) => {
     try {
-        const { decoded_authorization } = req;
-        const userID = decoded_authorization.userID;
-        const charge = await stripe.charges.create({
-            amount: Number(req.body.amount),
+        const paymentIntent = await stripe.paymentIntents.create({
+            amount: req.body.amount,
             currency: 'usd',
-            source: 'tok_visa',
-            description: req.body.description,
+            automatic_payment_methods: {
+                enabled: true,
+            },
         });
-        res.json({ success: true, message: 'payment successful' });
+        res.json({ success: true, message: 'payment successful', paymentIntent: paymentIntent.client_secret });
     } catch (err) {
-        console.error(err);
-        throw new Error('payment failed');
+        res.status(400).json({ error: err.message });
     }
 };
 module.exports = checkout_session;
